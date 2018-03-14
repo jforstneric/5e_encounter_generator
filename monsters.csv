@@ -1,0 +1,103 @@
+aarakocra,elemental plane,humanoid,12,50
+aboleth,water,aberration,13,5900
+animated armor,dungeon,construct,19,200
+ankheg,underground,monstrosity,21,450
+flying sword,dungeon,construct,20,50
+rug of smothering,dungeon,construct,20,450
+azer,elemental plane,elemental,22,450
+banshee,dungeon,undead,23,1100
+basilisk,underground,monstrosity,24,700
+behir,underground,monstrosity,25,7200
+beholder,dungeon,aberration,28,10000
+death tyrant,dungeon,undead,29,11500
+spectator,dungeon,aberration,30,700
+needle blight,forest,plant,32,50
+twig blight,forest,plant,32,25
+vine blight,forest,plant,32,100
+bugbear,nature,goblinoid,33,200
+bugbear chief,nature,goblinoid,33,700
+bulette,nature,monstrosity,34,1800
+bullywug,nature,humanoid,35,50
+cambion,elemental plane,fiend,36,1800
+carrion crawler,underground,monstrosity,37,450
+centaur,nature,monstrosity,38,450
+chimera,nature,monstrosity,39,2300
+chuul,water,aberration,40,1100
+cloaker,underground,aberration,41,3900
+cockatrice,nature,monstrosity,43,100
+couatl,elemental plane,celestial,43,1100
+crawling claw,dungeon,undead,44,10
+cyclops,nature,giant,45,2300
+darkmantle,underground,monstrosity,46,100
+death knight,dungeon,undead,47,18000
+demilich,dungeon,undead,48,20000
+balor,elemental plane,fiend,55,22000
+barlgura,elemental plane,fiend,56,1800
+chasme,elemental plane,fiend,57,2300
+dretch,elemental plane,fiend,57,50
+glabrezu,elemental plane,fiend,58,5000
+goristo,elemental plane,fiend,59,18000
+hezrou,elemental plane,fiend,60,3900
+manes,elemental plane,fiend,60,25
+marilith,elemental plane,fiend,61,15000
+nalfeshnee,elemental plane,fiend,62,10000
+quasit,elemental plane,fiend,63,200
+shadow demon,elemental plane,fiend,64,1100
+vrock,elemental plane,fiend,64,2300
+yochlol,elemental plane,fiend,65,5900
+barbed devil,elemental plane,fiend,70,1800
+bearded devil,elemental plane,fiend,70,700
+bone devil,elemental plane,fiend,71,5000
+chain devil,elemental plane,fiend,72,3900
+erinyes,elemental plane,fiend,73,8400
+horned devil,elemental plane,fiend,74,7200
+ice devil,elemental plane,fiend,75,11500
+imp,elemental plane,fiend,76,200
+lemure,elemental plane,fiend,76,10
+pit fiend,elemental plane,fiend,77,25000
+spined devil,elemental plane,fiend,78,450
+displacer beast,nature,monstrosity,81,700
+doppelganger,city,monstrosity,82,700
+dracolich,nature,undead,84,18000
+drider,underground,monstrosity,120,2300
+driad,forest,fey,121,200
+duergar,underground,humanoid,122,200
+air elemental,elemental plane,elemental,124,1800
+earth elemental,elemental plane,elemental,124,1800
+fire elemental,elemental plane,elemental,125,1800
+water elemental,elemental plane,elemental,125,1800
+drow,underground,humanoid,128,50
+drow elite warrior,underground,humanoid,128,1800
+drow mage,underground,humanoid,129,2900
+drow priestess,underground,humanoid,129,3900
+ettercap,underground,monstrosity,131,450
+ettin,nature,giant,132,1100
+faerie dragon r/o/y,nature,fey,133,200
+faerie dragon g/b/i/v,nature,fey,133,450
+flameskull,dungeon,undead,134,1100
+flumph,underground,aberration,135,25
+fomorian,underground,giant,136,3900
+gas spore,underground,plant,138,100
+shrieker,underground,plant,138,10
+violet fungus,underground,plant,138,50
+galeb duhr,nature,elemental,139,2300
+gargoyle,city,elemental,140,450
+dao,elemental plane,elemental,143,7200
+goblin,nature,goblinoid,166,50
+goblin boss,nature,goblinoid,166,200
+night hag,nature,fey,178,1800
+sea hag,water,fey,179,450
+hobgoblin,nature,goblinoid,186,100
+hobgoblin captain,nature,goblinoid,186,700
+hobgoblin warlord,nature,goblinoid,187,2300
+pixie,forest,fey,253,50
+blink dog,city,fey,318,50
+acolyte,city,humanoid,342,50
+assassin,city,humanoid,343,3900
+bandit,nature,humanoid,343,25
+bandit captain,nature,humanoid,344,450
+commoner,city,humanoid,345,10
+cultist,city,humanoid,345,25
+guard,city,humanoid,347,25
+scout,nature,humanoid,349,100
+thug,city,humanoid,350,100
