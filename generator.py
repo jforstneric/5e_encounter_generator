@@ -155,10 +155,10 @@ def printEncounter(encounteredMonsters,encounterType):
 	print('Our encounter consists of:')
 	if encounterType == 1:
 		for m in range(len(encounteredMonsters)):
-			print(str(encounteredMonsters[m][0].capitalize()) + ', type ' + str(encounteredMonsters[m][2]) + ', XP value of ' + str(encounteredMonsters[m][4]) + ' (DMG pg. ' + encounteredMonsters[m][3] + ')')
+			print(str(encounteredMonsters[m][0].capitalize()) + ', type ' + str(encounteredMonsters[m][2]) + ', XP value of ' + str(encounteredMonsters[m][4]) + ' (MM pg. ' + encounteredMonsters[m][3] + ')')
 	else:
 		for m in range(len(encounteredMonsters) - 1):
-			print(str(encounteredMonsters[m][0].capitalize()) + ', found in ' + str(encounteredMonsters[m][1]) + ', XP value of ' + str(encounteredMonsters[m][4]) + ' (DMG pg. ' + encounteredMonsters[m][3] + ')')			
+			print(str(encounteredMonsters[m][0].capitalize()) + ', found in ' + str(encounteredMonsters[m][1]) + ', XP value of ' + str(encounteredMonsters[m][4]) + ' (MM pg. ' + encounteredMonsters[m][3] + ')')			
 	print()
 	
 
