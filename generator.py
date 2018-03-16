@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 #Jure Forstneric
@@ -7,7 +7,6 @@
 
 #This is a D&D 5e random combat encounter generator.
 
-import pprint
 import csv
 import random
 
