@@ -96,13 +96,13 @@ def chooseEncounterType():
 
 def specifyEncounter(monsterData,encounterChoice):
 	specificType = []
-	for i in range(len(monsterData)):
-		if monsterData[i][encounterChoice] not in str(specificType):
-			specificType.append(monsterData[i][encounterChoice])
+	for m in monsterData:
+		if m[encounterChoice] not in str(specificType):
+			specificType.append(m[encounterChoice])
 	specificType.sort()
 	print()
 	print('Press the corresponding number to select encounter type:')
-	for i in range(len(specificType)):
+	for i in range(len(specificType)):			#range(len()) - easier to print #'s for choosing the encounter
 		print(str(i) + ' ' + str(specificType[i]))
 	encounterType = int(input())
 	print()
@@ -114,9 +114,9 @@ def specifyEncounter(monsterData,encounterChoice):
 
 def createMonsterList(monsterData,encounterType,encounterChoice):
 	possibleMonsters = []
-	for i in range(len(monsterData)):
-		if encounterType in monsterData[i][encounterChoice]:
-			possibleMonsters.append(monsterData[i])
+	for m in monsterData:
+		if encounterType in m[encounterChoice]:
+			possibleMonsters.append(m)
 	return possibleMonsters
 
 #generate our combat encounter
@@ -128,9 +128,9 @@ def encounterGen(monsterList,xpThreshold):
 	xpLowerLimit = int(xpThreshold / 25)
 	while xpMonsters <(xpThreshold - (3 * xpLowerLimit)):		#keep adding monsters until we get close enought to xpThreshold
 		possibleMonsters = []
-		for i in range(len(monsterList)):		#remove monsters with too high or too low xp values
-			if xpLowerLimit < int(monsterList[i][4]) < (xpThreshold - xpMonsters):
-				possibleMonsters.append(monsterList[i])		
+		for m in monsterList:		#remove monsters with too high or too low xp values
+			if xpLowerLimit < int(m[4]) < (xpThreshold - xpMonsters):
+				possibleMonsters.append(m)		
 		if not possibleMonsters:
 			print('Ran out of suitable monsters :-(')		#this is just a warning that there might have been xp left over
 			return encounteredMonsters 				
@@ -138,8 +138,8 @@ def encounterGen(monsterList,xpThreshold):
 		encounteredMonsters.append(possibleMonsters[r])
 		monsterCounter = len(encounteredMonsters)
 		xpMonsters = 0
-		for xp in range(len(encounteredMonsters)):
-			xpMonsters += int(encounteredMonsters[xp][4])
+		for xp in encounteredMonsters:
+			xpMonsters += int(xp[4])
 		if monsterCounter == 2:			#these if statements take into account difficulty scaling with # of monsters
 			xpMonsters = int(xpMonsters * 1.5)
 		if 3 <= monsterCounter <= 6:
@@ -153,11 +153,11 @@ def encounterGen(monsterList,xpThreshold):
 def printEncounter(encounteredMonsters,encounterType):
 	print('Our encounter consists of:')
 	if encounterType == 1:
-		for m in range(len(encounteredMonsters)):
-			print(str(encounteredMonsters[m][0].capitalize()) + ', type ' + str(encounteredMonsters[m][2]) + ', XP value of ' + str(encounteredMonsters[m][4]) + ' (MM pg. ' + encounteredMonsters[m][3] + ')')
+		for m in encounteredMonsters:
+			print(str(m[0].capitalize()) + ', type ' + str(m[2]) + ', XP value of ' + str(m[4]) + ' (MM pg. ' + m[3] + ')')
 	else:
-		for m in range(len(encounteredMonsters) - 1):
-			print(str(encounteredMonsters[m][0].capitalize()) + ', found in ' + str(encounteredMonsters[m][1]) + ', XP value of ' + str(encounteredMonsters[m][4]) + ' (MM pg. ' + encounteredMonsters[m][3] + ')')			
+		for m in encounteredMonsters:
+			print(str(m[0].capitalize()) + ', found in ' + str(m[1]) + ', XP value of ' + str(m[4]) + ' (MM pg. ' + m[3] + ')')
 	print()
 	
 
