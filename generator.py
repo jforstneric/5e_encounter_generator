@@ -9,6 +9,7 @@
 
 import csv
 import random
+import argparse
 
 #list copied from DMG pg 82 for xp thresholds by char level
 
@@ -35,17 +36,42 @@ thresholds = [
 [2800, 5700, 8500, 12700]
 ]
 
-#our function with two inputs - the number of PCs and their average level  
+#this function is new for 2.0, it allows us to parse arguments
 
-def partyThreshold(numPcs, avgLev):
-	print('What is the difficulty of the encounter?')
-	print('1 - Easy, 2 - Medium, 3 - Difficult, 4 - Deadly')
-	encDiff = int(input())
+def argumentParse():
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-p", "--partySize", help="The number of PCs in our party.", type=int)
+	parser.add_argument("-l", "--level", help="The average level of the PCs.", type=int)
+	parser.add_argument("-d", "--difficulty", help="Difficulty (1 - Easy, 2 - Medium, 3 - Difficult, 4 - Deadly)", type=int, choices=[1, 2, 3, 4])
+	parser.add_argument("-e", "--environment", help="Environment (0 - City, 1 - Dungeon, 2 - Forest, 3 - Nature, 4 - Other plane, 5 - Underground, 6 - Water)", type=int, choices=[0, 1, 2, 3, 4, 5, 6])
+	parser.add_argument("-i", "--interactive", help="Run the program in interactive mode to setup the encounter (implied if arguments are missing).", action="store_true")
+	args = parser.parse_args()
+	#if any of our arguments besides environment are missing, default to interactive mode by returning None:
+	if (not args.partySize) or (not args.level) or (not args.difficulty): 
+		print("Running in interactive mode!")
+		return([None, None, None, None])
+	if args.interactive:
+		print("Running in interactive mode!")
+		return([None, None, None, None])
+	print("Party size: " + str(args.partySize))
+	print("Party level: " + str(args.level))
+	print("Encounter difficulty: " + str(args.difficulty))
+	returnedArguments = [args.partySize, args.level, args.difficulty, args.environment]
+	return(returnedArguments)
+
+#our function with three inputs - number of PCs, their average level, and difficulty  
+
+def partyThreshold(numPcs, avgLev, difficulty):
+	if difficulty is None:
+		print('What is the difficulty of the encounter?')
+		print('1 - Easy, 2 - Medium, 3 - Difficult, 4 - Deadly')
+		encDiff = int(input())
+	else: 
+		encDiff = difficulty
 	xp = thresholds[(avgLev - 1)][(encDiff - 1)]
 	xp = (xp * numPcs)
 	print()
 	print('Our combined party XP threshold is: ' + str(xp))
-	print()
 	return xp
 	
 #this is a function to get our adventuring party, save it in a CSV file to use as the default for next time
@@ -81,34 +107,28 @@ def loadMonsters():
 	monsterData = list(monsterReader)		#saves data from CSV to list
 	return(monsterData)
 	
-#function to choose if want to select monsters by location or type
-	
-def chooseEncounterType():
-	while True:
-		print('Press L for encounter by location (city, forest, underground... ) or T for type (undead, monstrosity, humanoid... ):')
-		answer = str(input())
-		if answer == 'l' or answer == 'L':
-			return 1
-		if answer == 't' or answer == 'T':
-			return 2
 
-#specify the encounter (once we've defined if we're choosing among locations or types)
+#specify the encounter (in 2.0 we only chose among locations)
 
-def specifyEncounter(monsterData,encounterChoice):
+def specifyEncounter(monsterData,encounterChoice,specifiedLocation):
 	specificType = []
-	for m in monsterData:
-		if m[encounterChoice] not in str(specificType):
-			specificType.append(m[encounterChoice])
+	for i in monsterData:
+		if i[encounterChoice] not in str(specificType):
+			specificType.append(i[encounterChoice])
 	specificType.sort()
 	print()
-	print('Press the corresponding number to select encounter type:')
-	for i in range(len(specificType)):			#range(len()) - easier to print #'s for choosing the encounter
-		print(str(i) + ' ' + str(specificType[i]))
-	encounterType = int(input())
+	#if we didn't get a location argument, we select it interactively
+	if specifiedLocation is None:
+		print('Press the corresponding number to select encounter type:')
+		for i in range(len(specificType)):
+			print(str(i) + ' ' + str(specificType[i]))
+		encounterType = int(input())
+	else:
+		encounterType = specifiedLocation
 	print()
 	print('Your choice is ' + str(specificType[encounterType]) + ' encounter.')
 	print()
-	return specificType[encounterType]	#returns the specific type of encounter
+	return specificType[encounterType]
 
 #create a new list of monsters defined by the type of encounter
 
@@ -152,25 +172,35 @@ def encounterGen(monsterList,xpThreshold):
 
 def printEncounter(encounteredMonsters,encounterType):
 	print('Our encounter consists of:')
-	if encounterType == 1:
-		for m in encounteredMonsters:
-			print(str(m[0].capitalize()) + ', type ' + str(m[2]) + ', XP value of ' + str(m[4]) + ' (MM pg. ' + m[3] + ')')
-	else:
-		for m in encounteredMonsters:
-			print(str(m[0].capitalize()) + ', found in ' + str(m[1]) + ', XP value of ' + str(m[4]) + ' (MM pg. ' + m[3] + ')')
+	for m in encounteredMonsters:
+		print(str(m[0].capitalize()) + ', type ' + str(m[2]) + ', XP value of ' + str(m[4]) + ' (MM pg. ' + m[3] + ')')
 	print()
+	print('Press enter to repeat or \'q\' to quit.')
+	answer = str(input())
+	if answer == 'q' or answer == 'Q':
+		raise SystemExit
+	else: 
+		return()
 	
 
 
 def main():
-	ourParty = party()
-	xp = partyThreshold(ourParty[0], ourParty[1])
+	returnedArguments = argumentParse()
+	#if argumentParse returns None (when we are missing any of the party arguments), run the party and difficulty setup:
+	if (returnedArguments[0] is None):
+		ourParty = party()
+		xp = partyThreshold(ourParty[0], ourParty[1], None)
+	#if we do have the party arguments, we use them to generate our XP threshold
+	else:
+		ourParty = returnedArguments
+		xp = partyThreshold(ourParty[0], ourParty[1], ourParty[2])
 	monsterData = loadMonsters()
-	encounterChoice = chooseEncounterType()
-	encounterType = specifyEncounter(monsterData,encounterChoice)
+	encounterChoice = 1   #this option is static in 2.0, previously, this was encounterChoice=chooseEncounterType()
+	encounterType = specifyEncounter(monsterData,encounterChoice,returnedArguments[3])
 	monsterList = createMonsterList(monsterData,encounterType,encounterChoice)
 	encounteredMonsters = encounterGen(monsterList,xp)
 	printEncounter(encounteredMonsters,encounterChoice)
+
 
 
 while True:
