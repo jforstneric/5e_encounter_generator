@@ -16,4 +16,4 @@ The program should work better with a larger set of monsters (as it stands, cert
 
 Changelog:
 1.0 - Initial version
-2.0 - Added arguments - you can now specify the party and encounter via arguments when running the program. If arguments are missing, it runs in interactive mode (as before). Removed option to choose creatures by type, only by location.
+2.0 - Added arguments - you can now specify the party and encounter via arguments when running the program. If arguments are missing, it runs in interactive mode (as before). Removed option to choose creatures by type, only by location. Run generator -h for list of possible arguments.
