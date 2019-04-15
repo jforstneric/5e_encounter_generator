@@ -1,4 +1,5 @@
-D&D 5e random combat encounter generator - 2.0
+
+# D&D 5e random combat encounter generator - 2.0
 
 This is a small project for learning/practicing Python. I realise it could be improved in many ways but perhaps someone will find it useful :-)
 
@@ -10,10 +11,12 @@ The CSV file can also be cut down before use. For example, to run a strictly nat
 
 The CSV information should be: name,location,type,xp,MM page.
 
+### How does it work?
+
 The program first calculates the XP threshold for the party and difficulty we're trying to achieve. From the possible monsters we remove any which are too weak (so we don't have encounters with twenty villagers) or too strong, from the remaining monsters we add random ones to the encounter, repeating the removal of monsters which would be too strong (as this goes down with each added monster). The program isn't as exact as it could be because of the way encounter XP are calculated in 5e (the difficulty rises non-linearly with the number of enemy creatures). 
 
 The program should work better with a larger set of monsters (as it stands, certain combinations of difficulty/location are not be possible), hopefully I'll get around to adding all of the monsters from the DMG to the CSV file, but the resulting encounters will still need a bit of tweaking (though, honestly, this applies to most encounters in D&D ;-)
 
-Changelog:
-1.0 - Initial version
-2.0 - Added arguments - you can now specify the party and encounter via arguments when running the program. If arguments are missing, it runs in interactive mode (as before). Removed option to choose creatures by type, only by location. Run generator -h for list of possible arguments.
+### Changelog:
+* 1.0 - Initial version
+* 2.0 - Added arguments - you can now specify the party and encounter via arguments when running the program. If arguments are missing, it runs in interactive mode (as before). Removed option to choose creatures by type, only by location. Run generator -h for list of possible arguments.
