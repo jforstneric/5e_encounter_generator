@@ -38,7 +38,7 @@ thresholds = [
 
 #this function is new for 2.0, it allows us to parse arguments
 
-def argumentParse():
+def argument_parse():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-p", "--partySize", help="The number of PCs in our party.", type=int)
 	parser.add_argument("-l", "--level", help="The average level of the PCs.", type=int)
@@ -61,7 +61,7 @@ def argumentParse():
 
 #our function with three inputs - number of PCs, their average level, and difficulty
 
-def partyThreshold(numPcs, avgLev, difficulty):
+def party_threshold(numPcs, avgLev, difficulty):
 	if difficulty is None:
 		print('What is the difficulty of the encounter?')
 		print('1 - Easy, 2 - Medium, 3 - Difficult, 4 - Deadly')
@@ -101,7 +101,7 @@ def party():
 
 #function to load monsters from csv file and return them as a list
 
-def loadMonsters():
+def load_monsters():
 	monsterFile = open('monsters.csv', 'r', newline='')		# opens the file monsters.csv in read-only mode
 	monsterReader = csv.reader(monsterFile)
 	monsterData = list(monsterReader)		# saves data from CSV to list
@@ -110,7 +110,7 @@ def loadMonsters():
 
 # specify the encounter (in 2.0 we only chose among locations)
 
-def specifyEncounter(monsterData, encounterChoice, specifiedLocation):
+def specify_encounter(monsterData, encounterChoice, specifiedLocation):
 	specificType = []
 	for i in monsterData:
 		if i[encounterChoice] not in str(specificType):
@@ -132,7 +132,7 @@ def specifyEncounter(monsterData, encounterChoice, specifiedLocation):
 
 # create a new list of monsters defined by the type of encounter
 
-def createMonsterList(monsterData, encounterType, encounterChoice):
+def create_monster_list(monsterData, encounterType, encounterChoice):
 	possibleMonsters = []
 	for m in monsterData:
 		if encounterType in m[encounterChoice]:
@@ -141,7 +141,7 @@ def createMonsterList(monsterData, encounterType, encounterChoice):
 
 # generate our combat encounter
 
-def encounterGen(monsterList, xpThreshold):
+def encounter_gen(monsterList, xpThreshold):
 	encounteredMonsters = []		# list for the encountered monsters
 	monsterCounter = 0
 	xpMonsters = 0
@@ -170,7 +170,7 @@ def encounterGen(monsterList, xpThreshold):
 
 #print out the monsters in a nicely formated way
 
-def printEncounter(encounteredMonsters, encounterType):
+def print_encounter(encounteredMonsters, encounterType):
 	print('Our encounter consists of:')
 	for m in encounteredMonsters:
 		print(str(m[0].capitalize()) + ', type ' + str(m[2]) + ', XP value of ' + str(m[4]) + ' (MM pg. ' + m[3] + ')')
@@ -184,24 +184,22 @@ def printEncounter(encounteredMonsters, encounterType):
 
 
 def main():
-	returnedArguments = argumentParse()
+	returnedArguments = argument_parse()
 	# if argumentParse returns None (when we are missing any of the party arguments), run the party and difficulty setup:
 	if (returnedArguments[0] is None):
 		ourParty = party()
-		xp = partyThreshold(ourParty[0], ourParty[1], None)
+		xp = party_threshold(ourParty[0], ourParty[1], None)
 	# if we do have the party arguments, we use them to generate our XP threshold
 	else:
 		ourParty = returnedArguments
-		xp = partyThreshold(ourParty[0], ourParty[1], ourParty[2])
-	monsterData = loadMonsters()
+		xp = party_threshold(ourParty[0], ourParty[1], ourParty[2])
+	monster_data = load_monsters()
 	encounterChoice = 1   # this option is static in 2.0, previously, this was encounterChoice=chooseEncounterType()
-	encounterType = specifyEncounter(monsterData, encounterChoice, returnedArguments[3])
-	monsterList = createMonsterList(monsterData, encounterType, encounterChoice)
-	encounteredMonsters = encounterGen(monsterList, xp)
-	printEncounter(encounteredMonsters, encounterChoice)
-
+	encounterType = specify_encounter(monster_data, encounterChoice, returnedArguments[3])
+	monsterList = create_monster_list(monster_data, encounterType, encounterChoice)
+	encounteredMonsters = encounter_gen(monsterList, xp)
+	print_encounter(encounteredMonsters, encounterChoice)
 
 
 while True:
 	main()
-	
